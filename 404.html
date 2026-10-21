@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0A0E1A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#EEF1F8" media="(prefers-color-scheme: light)">
+<title>404 Page Not Found</title>
+<style>
+:root{
+  --acc:#4EA8FF;
+  --acc2:#22D3EE;
+  --bg:#0A0E1A;
+  --bg-2:#070A12;
+  --surface:rgba(23,30,50,.62);
+  --line:rgba(255,255,255,.10);
+  --line-soft:rgba(255,255,255,.06);
+  --fg:#EAEEF9;
+  --fg-2:#98A2BD;
+  --fg-3:#5F6A88;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --r:20px;
+}
+@media (prefers-color-scheme:light){
+  :root{
+    --bg:#EEF1F8;--bg-2:#F8FAFF;
+    --surface:rgba(255,255,255,.78);
+    --line:rgba(12,20,40,.10);
+    --line-soft:rgba(12,20,40,.06);
+    --fg:#0D1426;--fg-2:#4C566F;--fg-3:#8A93A8;
+  }
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--fg);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:calc(24px + env(safe-area-inset-top)) 18px calc(24px + env(safe-area-inset-bottom));
+  overflow-x:hidden;
+}
+
+/* ---------- ambient background ---------- */
+.amb{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.amb i{position:absolute;display:block;border-radius:50%;filter:blur(72px);opacity:.55}
+.amb .g1{width:56vmax;height:56vmax;left:-18vmax;top:-22vmax;background:radial-gradient(circle,var(--acc),transparent 66%);opacity:.38;animation:drift 26s ease-in-out infinite}
+.amb .g2{width:44vmax;height:44vmax;right:-16vmax;bottom:-18vmax;background:radial-gradient(circle,var(--acc2),transparent 66%);opacity:.26;animation:drift 32s ease-in-out infinite reverse}
+.amb .mesh{
+  position:absolute;inset:-1px;
+  background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+  background-size:52px 52px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 30%,#000 20%,transparent 78%);
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 30%,#000 20%,transparent 78%);
+}
+@keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(4vmax,3vmax,0) scale(1.12)}}
+
+/* ---------- card ---------- */
+.card{
+  position:relative;z-index:1;
+  width:100%;max-width:560px;
+  background:var(--surface);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid var(--line);
+  border-radius:var(--r);
+  padding:26px 22px 22px;
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 40px 80px -32px rgba(0,0,0,.55);
+  animation:rise .55s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-2);
+  border:1px solid var(--line);border-radius:999px;
+  padding:6px 11px 6px 9px;
+}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 var(--acc);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--acc) 60%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+.code{
+  font-family:var(--mono);font-weight:700;
+  font-size:clamp(76px,26vw,124px);
+  line-height:.92;letter-spacing:-.055em;
+  margin:16px 0 2px;
+  background:linear-gradient(160deg,var(--fg) 22%,var(--acc) 96%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  font-variant-numeric:tabular-nums;
+}
+h1{font-size:clamp(21px,5.4vw,26px);line-height:1.25;margin:8px 0 8px;letter-spacing:-.02em;font-weight:650}
+.lede{margin:0;color:var(--fg-2);font-size:15.5px;line-height:1.62}
+
+/* ---------- trace ---------- */
+.trace{margin:24px 0 4px;padding:16px 12px 12px;border:1px solid var(--line-soft);border-radius:14px;background:rgba(255,255,255,.02)}
+.trace-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-3);margin:0 0 14px 2px}
+.hops{display:flex;align-items:flex-start;justify-content:space-between;gap:2px}
+.hop{flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;min-width:0}
+.hop::before{content:"";position:absolute;top:9px;left:-50%;width:100%;height:2px;background:var(--line);border-radius:2px}
+.hop:first-child::before{display:none}
+.hop.ok::before,.hop.fail::before{background:linear-gradient(90deg,var(--acc2),var(--acc))}
+.dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);background:var(--bg-2);position:relative;z-index:1;display:grid;place-items:center}
+.hop.ok .dot{border-color:var(--acc2)}
+.hop.ok .dot::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--acc2)}
+.hop.fail .dot{border-color:var(--acc);background:var(--acc);box-shadow:0 0 0 5px color-mix(in srgb,var(--acc) 18%,transparent)}
+.hop.fail .dot::before,.hop.fail .dot::after{content:"";position:absolute;width:9px;height:2px;border-radius:2px;background:var(--bg-2)}
+.hop.fail .dot::before{transform:rotate(45deg)}
+.hop.fail .dot::after{transform:rotate(-45deg)}
+.hop.dim{opacity:.42}
+.hop.dim::before{background:repeating-linear-gradient(90deg,var(--line) 0 4px,transparent 4px 9px)}
+.hop span{font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--fg-3);text-align:center;line-height:1.3}
+.hop.fail span{color:var(--acc);font-weight:600}
+.verdict{margin:14px 2px 0;font-family:var(--mono);font-size:11.5px;color:var(--fg-2);line-height:1.5}
+.verdict b{color:var(--acc);font-weight:600}
+
+/* ---------- actions ---------- */
+.acts{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
+.btn{
+  flex:1 1 160px;min-height:48px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--sans);font-size:15px;font-weight:600;
+  border-radius:13px;border:1px solid transparent;cursor:pointer;
+  text-decoration:none;padding:0 18px;
+  transition:transform .12s ease,filter .2s ease,background .2s ease;
+}
+.btn:active{transform:scale(.975)}
+.btn:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.btn.solid{background:linear-gradient(140deg,var(--acc),var(--acc2));color:#0A0E1A}
+.btn.solid:hover{filter:brightness(1.08)}
+.btn.line{background:transparent;border-color:var(--line);color:var(--fg)}
+.btn.line:hover{background:rgba(127,140,180,.12)}
+
+/* ---------- meta ---------- */
+.meta{margin:20px 0 0;border-top:1px solid var(--line-soft);padding-top:14px;display:grid;gap:9px}
+.row{display:grid;grid-template-columns:66px 1fr;gap:10px;align-items:baseline;font-family:var(--mono);font-size:11.5px}
+.row dt{color:var(--fg-3);letter-spacing:.1em;text-transform:uppercase;font-size:10px}
+.row dd{margin:0;color:var(--fg-2);word-break:break-all;overflow-wrap:anywhere}
+.copy{
+  margin-top:14px;width:100%;min-height:40px;
+  background:transparent;border:1px dashed var(--line);border-radius:11px;
+  color:var(--fg-3);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  cursor:pointer;transition:color .2s,border-color .2s;
+}
+.copy:hover{color:var(--fg);border-color:var(--acc)}
+.copy:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+.foot{position:relative;z-index:1;margin:18px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3);text-align:center}
+.foot a{color:inherit;text-decoration:none;border-bottom:1px solid var(--line)}
+
+@media (max-width:380px){
+  .card{padding:22px 17px 18px}
+  .hop span{font-size:9px}
+  .row{grid-template-columns:58px 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="amb" aria-hidden="true">
+  <i class="g1"></i><i class="g2"></i><div class="mesh"></div>
+</div>
+
+<main class="card" role="main">
+  <div class="tag"><span class="pulse"></span> HTTP 404 &middot; Client error</div>
+
+  <div class="code" aria-hidden="true">404</div>
+  <h1>Page Not Found</h1>
+  <p class="lede">There is nothing at this address. The page may have been renamed, moved, or deleted.</p>
+
+  <section class="trace" aria-label="Where the request stopped">
+    <p class="trace-h">Request path</p>
+    <div class="hops">
+      <div class="hop ok"><span class="dot"></span><span>Browser</span></div>
+      <div class="hop ok"><span class="dot"></span><span>Network</span></div>
+      <div class="hop ok"><span class="dot"></span><span>Server</span></div>
+      <div class="hop fail"><span class="dot"></span><span>Website</span></div>
+    </div>
+    <p class="verdict">Stopped at <b>Website</b> — the address does not match anything on this site.</p>
+  </section>
+
+  <div class="acts">
+    <a class="btn solid" href="/">Go to homepage</a>
+    <a class="btn line" href="#" id="m-back" role="button">Go back</a>
+  </div>
+
+  <dl class="meta">
+    <div class="row"><dt>URL</dt><dd id="m-url">&mdash;</dd></div>
+    <div class="row"><dt>Time</dt><dd id="m-time">&mdash;</dd></div>
+    <div class="row"><dt>Ref</dt><dd id="m-ref">&mdash;</dd></div>
+  </dl>
+  <button class="copy" id="m-copy" type="button">Copy details for support</button>
+</main>
+
+<p class="foot">I D I G I L A B S</p>
+
+<script>
+(function(){
+  var pad=function(n){return n<10?"0"+n:""+n};
+  var d=new Date();
+  var stamp=d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+" "+pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds());
+  var ref=(Date.now().toString(36)+Math.random().toString(36).slice(2,6)).toUpperCase();
+  var url=location.pathname+location.search;
+  var set=function(id,v){var el=document.getElementById(id);if(el)el.textContent=v};
+  set("m-url",url.length>120?url.slice(0,120)+"\u2026":url);
+  set("m-time",stamp);
+  set("m-ref",ref);
+
+  var btn=document.getElementById("m-copy");
+  if(btn){
+    btn.addEventListener("click",function(){
+      var txt="Error 404 Page Not Found\nURL: "+location.href+"\nTime: "+stamp+"\nRef: "+ref+"\nAgent: "+navigator.userAgent;
+      var done=function(){btn.textContent="Copied \u2713";setTimeout(function(){btn.textContent="Copy details for support"},2200)};
+      if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done,fallback)}else{fallback()}
+      function fallback(){
+        var ta=document.createElement("textarea");ta.value=txt;ta.setAttribute("readonly","");
+        ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+        try{document.execCommand("copy");done()}catch(e){btn.textContent="Press Ctrl+C to copy"}
+        document.body.removeChild(ta);
+      }
+    });
+  }
+
+  var back=document.getElementById("m-back");
+  if(back){back.addEventListener("click",function(e){e.preventDefault();if(history.length>1){history.back()}else{location.href="/"}})}
+  var again=document.getElementById("m-retry");
+  if(again){again.addEventListener("click",function(e){e.preventDefault();location.reload()})}
+})();
+</script>
+</body>
+</html>
